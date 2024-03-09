@@ -1,38 +1,32 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "myfunc.h"
+#include <math.h>
 
-int myfunc(int b) {
-    char *buffer = malloc(sizeof(char) * 1000);
-    buffer [0] = b + 4;
-    // здесь должен ругаться sonarcloud, т.к. утечка памяти
-    return buffer[0];
-}
+int myfunc(float a, float b, float c, float *x1, float *x2) {
+    float dick = b * b - 4 * a * c;
+    if (a == 0) {
+	printf("Неккоректный ввод");
+	return 1;}
+    if (b == 0) {
+	printf("Неккоректный ввод");
+	return 2;}
 
-int val;
-
-int fibonachi(int num) {
-    int prev = 1;
-    int next = 1;
-
-    if (num < 0)
-        return 0;
-
-    if (num <= 2)
-        return num;
-
-    int i = 2;
-    while (i < num) {
-        next += prev;
-        prev = next - prev;
-        i++;
+    if (dick > 0) {
+        *x1 = (-b + sqrt(dick)) / (2 * a);
+        *x2 = (-b - sqrt(dick)) / (2 * a);
+        printf("x1 = %.2f\n", *x1);
+        printf("x2 = %.2f\n", *x2);
+	return 4;
     }
-
-    return next;
-}
-
-void printStdoutMessages() {
-    printf("This is a test message from myfunc.c\n");
-    printf("Do not disturb\n");
+    if (dick == 0) {
+        *x1 = (-b) / (2 * a);
+        printf("x = %.2f\n", *x1);
+	return 5;
+    }
+    if (dick < 0) { // Исправлено
+        printf("Уравнение не имеет корней\n");
+	return 6;
+    }
+    return 0;
 }
