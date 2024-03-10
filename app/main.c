@@ -5,7 +5,7 @@ int main() {
 	float a, b, c;
 	float x1, x2;
 	printf("Введите коэффициенты уравнения: a, b, c\n");
-	if(scanf("%f %f %f", &a, &b, &c)) {}
+	if(scanf("%f %f %f", &a, &b, &c) == 3) {}
 
 	myfunc(a, b, c, &x1, &x2);
 	return 0; }
